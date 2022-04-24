@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2277883984928748639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2277883984928748624}
+  m_Layer: 0
+  m_Name: Snake Body Segments
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2277883984928748624
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277883984928748639}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2277883985188366601}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2277883985188366600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2277883985188366601}
+  - component: {fileID: 2277883985188366602}
+  - component: {fileID: 2277883985188366603}
+  m_Layer: 0
+  m_Name: Snake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2277883985188366601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277883985188366600}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2277883984025052490}
+  - {fileID: 2277883984928748624}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2277883985188366602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277883985188366600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68c203c98b267e94fbccf7e3e822b5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headSegment: {fileID: 2277883984025052489}
+  bodySegmentContainer: {fileID: 2277883984928748639}
+  bodySegmentPrefab: {fileID: 6417752908048870283, guid: 9cc2fd52cb603124db9fe4e6d3dbe99e, type: 3}
+  x: 0
+  y: 0
+  size: 4
+  baseSpeed: 0.2
+  speedPerBlock: 0.01
+  direction: 2
+--- !u!50 &2277883985188366603
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277883985188366600}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!1001 &4354435451283065807
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2277883985188366601}
+    m_Modifications:
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.939612
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811590, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_Name
+      value: Snake Head Segment
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 20655541db90c2641963d25c75885331, type: 3}
+--- !u!1 &2277883984025052489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2590313686761811590, guid: 20655541db90c2641963d25c75885331, type: 3}
+  m_PrefabInstance: {fileID: 4354435451283065807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2277883984025052490 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
+  m_PrefabInstance: {fileID: 4354435451283065807}
+  m_PrefabAsset: {fileID: 0}
