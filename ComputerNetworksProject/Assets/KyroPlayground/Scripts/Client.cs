@@ -16,6 +16,7 @@ public class Client : MonoBehaviour
     public List<Vector2> clientPlayerLocations { get; private set; } = new List<Vector2>();
 
     private UdpClient listenServer;
+    Thread clientThread;
     public string hostIP;
 
     Renderer renderer;
@@ -46,7 +47,7 @@ public class Client : MonoBehaviour
     public void startClient()
     {
         listenServer = new UdpClient(7952);
-        Thread clientThread = new Thread(() => listner(listenServer));
+        clientThread = new Thread(() => listner(listenServer));
         clientThread.Start();
     }
 
@@ -134,6 +135,15 @@ public class Client : MonoBehaviour
 
             }
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (listenServer != null)
+        {
+            listenServer.Close();
+            clientThread.Abort();
+        }        
     }
 
 

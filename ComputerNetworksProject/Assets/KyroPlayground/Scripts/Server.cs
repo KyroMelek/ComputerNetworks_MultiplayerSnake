@@ -20,6 +20,7 @@ public class Server : MonoBehaviour
     public bool P2Ready = false;
 
     private UdpClient listenServer;
+    Thread serverThread;
 
     //Update when eaten
     public Vector2 Snack1Location { get; private set; } = new Vector2();
@@ -45,8 +46,8 @@ public class Server : MonoBehaviour
     public void startServer()
     {
         listenServer = new UdpClient(7700);
-        Thread recordThread = new Thread(() => listner(listenServer));
-        recordThread.Start();
+        serverThread = new Thread(() => listner(listenServer));
+        serverThread.Start();
     }
 
     void Update()
@@ -192,5 +193,14 @@ public class Server : MonoBehaviour
         float newSnackX = UnityEngine.Random.Range(minX, maxX);
 
         return new Vector2(newSnackX, newSnackY);
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (listenServer != null)
+        {
+            listenServer.Close();
+            serverThread.Abort();
+        }        
     }
 }
