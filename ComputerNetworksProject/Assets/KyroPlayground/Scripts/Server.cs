@@ -63,7 +63,8 @@ public class Server : MonoBehaviour
                 IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 0);
                 Debug.Log("About to receive Client data");
                 recData = client.Receive(ref anyIP);          
-                string receivedText = Encoding.UTF8.GetString(recData);                
+                string receivedText = Encoding.UTF8.GetString(recData);
+                Debug.Log(receivedText);
                 if (receivedText.Contains("PlayerLocations:"))
                 {
                     if (anyIP.Address.ToString() == Player1.Key) //This means player 1 is sending locations 
@@ -93,11 +94,11 @@ public class Server : MonoBehaviour
                 }
                 else if (receivedText.Contains("UserName-Host")) //This means if player 1 (host) is joining this server -This always happens first
                 {
-                    Player1 = new KeyValuePair<string, string>(anyIP.Address.ToString(), receivedText.Split(';')[1]);
+                    Player1 = new KeyValuePair<string, string>(anyIP.Address.ToString(), receivedText.Split(':')[1]);
                 }
                 else if (receivedText.Contains("UserName-Client")) //This means if player 1 is joining this server
                 {
-                    Player2 = new KeyValuePair<string, string>(anyIP.Address.ToString(), receivedText.Split(';')[1]);
+                    Player2 = new KeyValuePair<string, string>(anyIP.Address.ToString(), receivedText.Split(':')[1]);
                     sendResponse();
                 }
                 //Following cases recieved during game runtime
@@ -152,11 +153,11 @@ public class Server : MonoBehaviour
     {
         int UDP_PORT = 7952;
         UdpClient udpClient = new UdpClient();
-        string stringToSend = "UserName:" + Player1.Value; //Username
+        string stringToSend = "UserNameHost:" + Player1.Value; //Username
         var data = Encoding.UTF8.GetBytes(stringToSend);
         udpClient.Send(data, data.Length, Player2.Key, UDP_PORT);
 
-        string stringToSend2 = "UserName:" + Player2.Value; //Username
+        string stringToSend2 = "UserNameClient:" + Player2.Value; //Username
         var data2 = Encoding.UTF8.GetBytes(stringToSend2);
         udpClient.Send(data2, data2.Length, Player1.Key, UDP_PORT);
     }

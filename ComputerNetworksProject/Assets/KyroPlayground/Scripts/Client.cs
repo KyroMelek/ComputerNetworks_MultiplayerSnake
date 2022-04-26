@@ -112,7 +112,10 @@ public class Client : MonoBehaviour
                 else if (receivedText.Contains("UserName"))
                 {
                     opponentUserName = receivedText.Split(':')[1];
-                    uiController.displayOpponentUserName(opponentUserName);
+                    if(receivedText.Contains("Host"))
+                        uiController.serverResponseRecieved(opponentUserName, true);
+                    else
+                        uiController.serverResponseRecieved(opponentUserName, false);
                 }
                 else if (receivedText.Contains("Start"))
                 {
