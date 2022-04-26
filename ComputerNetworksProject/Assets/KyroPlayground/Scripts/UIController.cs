@@ -10,7 +10,7 @@ public class UIController : MonoBehaviour
 {
     string userName;
     string hostIP;
-
+    string hostPort;
     Server server;
     Client client;
 
@@ -26,6 +26,8 @@ public class UIController : MonoBehaviour
     public TMP_Text userNameClientLobby;
 
     public GameObject userInfoHost;
+    public TMP_Text userInfoPortHost;
+    public TMP_Text userInfoPortClient;
     public TMP_Text HostIP;
     public TMP_Text ClientIP;
     public GameObject userInfoClient;
@@ -87,14 +89,9 @@ public class UIController : MonoBehaviour
         hostIP = IP;
     }
 
-    public void submitHostPort(string IP)
+    public void submitHostPort(string Port)
     {
-        hostIP = IP;
-    }
-
-    public void displayOpponentUserName(string userName)
-    {
-        //Set some text field in the ui to this user name
+        hostPort = Port;
     }
 
     public void createLobby()
@@ -103,7 +100,7 @@ public class UIController : MonoBehaviour
         server.startServer();
 
         string stringToSend = "UserName-Host:" + userName;
-        int UDP_PORT = int.Parse(HostPortField.text);
+        int UDP_PORT = int.Parse(hostPort);
         UdpClient udpClient = new UdpClient();
         
         var data = Encoding.UTF8.GetBytes(stringToSend);
@@ -124,12 +121,12 @@ public class UIController : MonoBehaviour
         hostIP = HostIPField.text;
 
         string stringToSend = "UserName-Client:" + userName;
-        int UDP_PORT = int.Parse(HostPortFieldJoin.text);
+        int UDP_PORT = int.Parse(hostPort);
         UdpClient udpClient = new UdpClient();
 
         var data = Encoding.UTF8.GetBytes(stringToSend);
         udpClient.Send(data, data.Length, hostIP, UDP_PORT);
-
+        ClientIP.text = localIP;
     }
 
     public void serverResponseRecieved(string _hostUserName, bool _isClient)
@@ -137,10 +134,6 @@ public class UIController : MonoBehaviour
         isServerResponseRecieved = true;
         hostUserName = _hostUserName;
         isClient = _isClient;
-        //connectingMenu.SetActive(false);
-        
-        //lobbyMenu.SetActive(true);
-       
     }
 
     IEnumerator setText(string hostUserName, bool isClient)
@@ -148,14 +141,16 @@ public class UIController : MonoBehaviour
         yield return new WaitUntil(() => readyToWriteTextFields);
         if (isClient)
         {
-            //userInfoHost.SetActive(true);
             LobbyName.text = hostUserName + "\'s Lobby";
             userNameHostLobby.text = userName;
+            HostIP.text = hostIP;
+            ClientIP.text = localIP;
+            userInfoPortClient.text = "7952";
         }
-
-        //userInfoClient.SetActive(true);
         userNameClientLobby.text = hostUserName;
-
+        ClientIP.text = server.Player2.Key;
+        userInfoPortHost.text = hostPort;
+        userInfoPortClient.text = "7952";
     }
 
     public void sendReadyStatus()

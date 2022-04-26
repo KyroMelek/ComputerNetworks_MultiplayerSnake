@@ -65,7 +65,7 @@ public class Server : MonoBehaviour
                 Debug.Log("About to receive Client data");
                 recData = client.Receive(ref anyIP);          
                 string receivedText = Encoding.UTF8.GetString(recData);
-                Debug.Log(receivedText);
+                Debug.Log("SERVER REC"+ receivedText);
                 if (receivedText.Contains("PlayerLocations:"))
                 {
                     if (anyIP.Address.ToString() == Player1.Key) //This means player 1 is sending locations 

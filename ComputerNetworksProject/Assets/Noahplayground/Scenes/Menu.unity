@@ -2128,6 +2128,8 @@ MonoBehaviour:
   userNameHostLobby: {fileID: 260420169}
   userNameClientLobby: {fileID: 1681216424}
   userInfoHost: {fileID: 1405471953}
+  userInfoPortHost: {fileID: 1556712875}
+  userInfoPortClient: {fileID: 555627433}
   HostIP: {fileID: 629843680}
   ClientIP: {fileID: 203750740}
   userInfoClient: {fileID: 1246814012}
@@ -4710,7 +4712,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 389208925}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: submitHostPort
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
