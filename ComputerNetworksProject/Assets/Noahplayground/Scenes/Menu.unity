@@ -2128,9 +2128,12 @@ MonoBehaviour:
   userNameHostLobby: {fileID: 260420169}
   userNameClientLobby: {fileID: 1681216424}
   userInfoHost: {fileID: 1405471953}
+  HostIP: {fileID: 629843680}
+  ClientIP: {fileID: 203750740}
   userInfoClient: {fileID: 1246814012}
   connectingMenu: {fileID: 522656344}
   lobbyMenu: {fileID: 328991398}
+  localIP: 
 --- !u!114 &389208926
 MonoBehaviour:
   m_ObjectHideFlags: 0

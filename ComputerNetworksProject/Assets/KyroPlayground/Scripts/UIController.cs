@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 using TMPro;
+using System.Net;
 
 public class UIController : MonoBehaviour
 {
@@ -25,10 +26,14 @@ public class UIController : MonoBehaviour
     public TMP_Text userNameClientLobby;
 
     public GameObject userInfoHost;
+    public TMP_Text HostIP;
+    public TMP_Text ClientIP;
     public GameObject userInfoClient;
 
     public GameObject connectingMenu;
     public GameObject lobbyMenu;
+
+    public string localIP;
 
     public static UIController theUIController { get; private set; }
     private void Awake()
@@ -40,6 +45,13 @@ public class UIController : MonoBehaviour
     {
         server = Server.theServer;
         client = Client.theClient;
+
+
+        Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0);        
+        socket.Connect("8.8.8.8", 65530);
+        IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;
+        localIP = endPoint.Address.ToString();
+        
     }
 
     // Update is called once per frame
@@ -85,6 +97,7 @@ public class UIController : MonoBehaviour
         LobbyName.text = userName + "\'s Lobby";
         userNameHostLobby.text = userName;
         userInfoHost.SetActive(true);
+        HostIP.text = localIP;
     }
 
     public void joinLobby()
