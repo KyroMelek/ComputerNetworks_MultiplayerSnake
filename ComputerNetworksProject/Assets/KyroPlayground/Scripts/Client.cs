@@ -129,11 +129,11 @@ public class Client : MonoBehaviour
                 Debug.Log("Server disposed");
                 return;
             }
-            catch (Exception err)
+/*            catch (Exception err)
             {
                 Debug.Log("UDP Exception: " + err.ToString());
 
-            }
+            }*/
         }
     }
 

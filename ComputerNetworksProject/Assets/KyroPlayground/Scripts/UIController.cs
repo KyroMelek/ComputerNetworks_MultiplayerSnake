@@ -36,6 +36,10 @@ public class UIController : MonoBehaviour
     public string localIP;
 
     private bool isServerResponseRecieved = false;
+    private bool readyToWriteTextFields = false;
+
+    string hostUserName;
+    bool isClient = false;
 
     public static UIController theUIController { get; private set; }
     private void Awake()
@@ -66,6 +70,9 @@ public class UIController : MonoBehaviour
             userInfoHost.SetActive(true);            
             userInfoClient.SetActive(true);
             isServerResponseRecieved = false;
+            readyToWriteTextFields = true;
+
+            StartCoroutine(setText(hostUserName, isClient));
         }
     }
 
@@ -125,20 +132,30 @@ public class UIController : MonoBehaviour
 
     }
 
-    public void serverResponseRecieved(string hostUserName, bool isClient)
+    public void serverResponseRecieved(string _hostUserName, bool _isClient)
     {
         isServerResponseRecieved = true;
+        hostUserName = _hostUserName;
+        isClient = _isClient;
         //connectingMenu.SetActive(false);
+        
         //lobbyMenu.SetActive(true);
+       
+    }
+
+    IEnumerator setText(string hostUserName, bool isClient)
+    {
+        yield return new WaitUntil(() => readyToWriteTextFields);
         if (isClient)
         {
             //userInfoHost.SetActive(true);
             LobbyName.text = hostUserName + "\'s Lobby";
-            userNameHostLobby.text = userName;            
+            userNameHostLobby.text = userName;
         }
 
         //userInfoClient.SetActive(true);
-        userNameClientLobby.text = hostUserName;        
+        userNameClientLobby.text = hostUserName;
+
     }
 
     public void sendReadyStatus()
