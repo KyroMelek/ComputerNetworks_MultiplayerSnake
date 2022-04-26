@@ -35,6 +35,8 @@ public class UIController : MonoBehaviour
 
     public string localIP;
 
+    private bool isServerResponseRecieved = false;
+
     public static UIController theUIController { get; private set; }
     private void Awake()
     {
@@ -57,7 +59,14 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isServerResponseRecieved)
+        {
+            connectingMenu.SetActive(false);
+            lobbyMenu.SetActive(true);
+            userInfoHost.SetActive(true);            
+            userInfoClient.SetActive(true);
+            isServerResponseRecieved = false;
+        }
     }
 
 
@@ -118,17 +127,18 @@ public class UIController : MonoBehaviour
 
     public void serverResponseRecieved(string hostUserName, bool isClient)
     {
-        connectingMenu.SetActive(false);
-        lobbyMenu.SetActive(true);
+        isServerResponseRecieved = true;
+        //connectingMenu.SetActive(false);
+        //lobbyMenu.SetActive(true);
         if (isClient)
         {
-            userInfoHost.SetActive(true);
+            //userInfoHost.SetActive(true);
             LobbyName.text = hostUserName + "\'s Lobby";
             userNameHostLobby.text = userName;            
         }
 
-        userInfoClient.SetActive(true);
-        userNameClientLobby.text = userName;        
+        //userInfoClient.SetActive(true);
+        userNameClientLobby.text = hostUserName;        
     }
 
     public void sendReadyStatus()
