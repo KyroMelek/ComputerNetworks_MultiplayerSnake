@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/NathanPlayground/Scenes/Nathan's Main Scene.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
