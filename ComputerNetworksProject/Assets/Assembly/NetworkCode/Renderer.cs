@@ -5,13 +5,18 @@ using UnityEngine;
 public class Renderer : MonoBehaviour
 {
     public static Renderer theRenderer { get; private set; }
-    private List<SpriteRenderer> opposingSnakeSpriteRenderers;
-    private SpriteRenderer snackSpriteRenderer;
-    private int previousSnakeLength = 0;
-    public Sprite opposingSnakeHead;
-    public Sprite opposingSnakeBody;
-    public Sprite Snack;
 
+    private int previousSnakeLength = 0;
+    public GameObject opposingSnakeHead;
+    public GameObject opposingSnakeBody;
+    public GameObject Snack;
+    List<Vector2> snakeCoords = new List<Vector2>();
+
+    bool shouldRender = false;
+
+    GameObject head;
+    List<GameObject> body;
+     
     private void Awake()
     {
         theRenderer = this;
@@ -19,13 +24,40 @@ public class Renderer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        snackSpriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+        head = new GameObject();
+        body = new List<GameObject>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (shouldRender)
+        {
+            for (int i = previousSnakeLength; i < snakeCoords.Count; ++i)
+            {
+                
+                if (i == 0)
+                {
+                    head = Instantiate(opposingSnakeHead);
+                }
+                else
+                {
+                    body.Add(Instantiate(opposingSnakeBody));
+                }
+
+            }
+            head.transform.rotation = getOpposingSnakeRotationFromCoords(snakeCoords);
+            head.transform.position = snakeCoords[0];
+
+            for (int i = 0; i < snakeCoords.Count - 1; ++i)
+            {
+                body[i].transform.position = snakeCoords[++i];
+            }
+            previousSnakeLength = snakeCoords.Count;
+
+            shouldRender = false;
+        }
     }
 
     private Quaternion getOpposingSnakeRotationFromCoords(List<Vector2> snakeCoords)
@@ -59,34 +91,14 @@ public class Renderer : MonoBehaviour
         return Quaternion.Euler(0, 0, 0);
     }
 
-    public void recieveAndRenderOpposingSnakeCoords(List<Vector2> snakeCoords)
+    public void recieveAndRenderOpposingSnakeCoords(List<Vector2> _snakeCoords)
     {
-        for(int i = previousSnakeLength; i < snakeCoords.Count; ++i)
-        {
-            SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-            spriteRenderer.color = Color.red;
-            if (i == 0)
-            {
-                spriteRenderer.sprite = opposingSnakeHead;
-            }
-            else
-            {
-                spriteRenderer.sprite = opposingSnakeBody;
-            }
-            opposingSnakeSpriteRenderers.Add(spriteRenderer);
-        }
-        opposingSnakeSpriteRenderers[0].transform.rotation = getOpposingSnakeRotationFromCoords(snakeCoords);
-        opposingSnakeSpriteRenderers[0].transform.position = snakeCoords[0];
-
-        for(int i = 1; i < snakeCoords.Count; ++i)
-        {
-            opposingSnakeSpriteRenderers[i].transform.position = snakeCoords[i];
-        }
-        previousSnakeLength = snakeCoords.Count;
+        snakeCoords = _snakeCoords;
+        shouldRender = true;        
     }
 
     public void recieveAndRenderSnackCoords(Vector2 snackCoords)
     {
-        snackSpriteRenderer.transform.position = snackCoords;
+       // snackSpriteRenderer.transform.position = snackCoords;
     }
 }
