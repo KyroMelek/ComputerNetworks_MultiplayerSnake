@@ -2173,9 +2173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219f37b34d74b4795a6bc77c7fc1ea94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opposingSnakeHead: {fileID: 0}
-  opposingSnakeBody: {fileID: 0}
-  Snack: {fileID: 0}
+  opposingSnakeHead: {fileID: 21300000, guid: f10297e208d89ec4099f980f1c21b001, type: 3}
+  opposingSnakeBody: {fileID: 21300000, guid: 1daca6dc19b233d40a54e90a14bec450, type: 3}
+  Snack: {fileID: 21300000, guid: 9c3326624c4988447835561789a553cb, type: 3}
 --- !u!4 &389208924
 Transform:
   m_ObjectHideFlags: 0
