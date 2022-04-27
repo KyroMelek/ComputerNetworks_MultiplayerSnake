@@ -16,7 +16,12 @@ public class Renderer : MonoBehaviour
 
     GameObject head;
     List<GameObject> body;
-     
+
+    bool dosnack = false;
+    bool isSnack1 = false;
+    Vector2 snackCoords = new Vector2();
+
+
     private void Awake()
     {
         theRenderer = this;
@@ -36,6 +41,20 @@ public class Renderer : MonoBehaviour
         {
             snake.updatePositions(snakeCoords, getOpposingSnakeRotationFromCoords(snakeCoords));
             shouldRender = false;
+        }
+
+        if (dosnack)
+        {
+            if (isSnack1)
+            {
+                Snack.transform.position = new Vector3(snackCoords.x, snackCoords.y, 0);
+            }
+            else
+            {
+                Snack2.transform.position = new Vector3(snackCoords.x, snackCoords.y, 0);
+            }
+            dosnack = false;
+            isSnack1 = false;
         }
     }
 
@@ -76,16 +95,10 @@ public class Renderer : MonoBehaviour
         shouldRender = true;        
     }
 
-    public void recieveAndRenderSnackCoords(Vector2 snackCoords, bool isSnack1)
+    public void recieveAndRenderSnackCoords(Vector2 _snackCoords, bool _isSnack1)
     {
-        if(isSnack1)
-        {
-            Snack.transform.position = new Vector3(snackCoords.x, snackCoords.y, 0);            
-        }
-        else 
-        {
-            Snack2.transform.position = new Vector3(snackCoords.x, snackCoords.y, 0);
-        }
-
+        isSnack1 = _isSnack1;
+        snackCoords = _snackCoords;
+        dosnack = true;
     }
 }

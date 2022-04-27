@@ -30,6 +30,10 @@ public class Server : MonoBehaviour
     public List<Vector2> Player1Locations { get; private set; } = new List<Vector2>();
     public List<Vector2> Player2Locations { get; private set; } = new List<Vector2>();
 
+    bool shouldCreateNewLocations = false;
+    string newLocationSnack;
+    bool isSnack1 = false;
+
     public static Server theServer { get; private set; }
     private void Awake()
     {
@@ -52,7 +56,48 @@ public class Server : MonoBehaviour
 
     void Update()
     {
-        
+        if (shouldCreateNewLocations)
+        {
+            int minX = -19;
+            int maxX = 19;
+            int minY = -19;
+            int maxY = 19;
+
+            int newSnackX = UnityEngine.Random.Range(minX, maxX);
+            int newSnackY = UnityEngine.Random.Range(minY, maxY);
+
+            bool locationValid = false;
+            while (!locationValid)
+            {
+                locationValid = true;
+
+                foreach (Vector2 position in Player1Locations)
+                    if (newSnackX == Mathf.RoundToInt(position.x) && newSnackY == Mathf.RoundToInt(position.y))
+                        locationValid = false;
+
+                foreach (Vector2 position in Player2Locations)
+                    if (newSnackX == Mathf.RoundToInt(position.x) && newSnackY == Mathf.RoundToInt(position.y))
+                        locationValid = false;
+            }
+
+            newLocationSnack = newSnackX + "," + newSnackY;
+            shouldCreateNewLocations = false;
+
+            if (isSnack1)
+            {
+                Snack1Location = newLocationSnack;
+
+                string data = "Snack1 location:" + Snack1Location;
+                sendDataToAllClients(data);
+            }
+            else
+            {
+                Snack2Location = newLocationSnack;
+                string data = "Snack2 location:" + Snack2Location;
+                sendDataToAllClients(data);
+            }
+            isSnack1 = false;
+        }
     }
     private void listner (UdpClient client)
     {
@@ -106,15 +151,14 @@ public class Server : MonoBehaviour
                 //Third case, snack 1 or 2 has been eaten. recievedText = "Snack1" or "Snack2"                    
                 else if (receivedText.Contains("Snack1"))
                 {
-                    Snack1Location = createNewSnackLocations();
-                    string data = "Snack1 location:" + Snack1Location;
-                    sendDataToAllClients(data);
+                    isSnack1 = true;
+                    createNewSnackLocations();
+
                 }
                 else if (receivedText.Contains("Snack2"))
                 {
-                    Snack2Location = createNewSnackLocations();
-                    string data = "Snack2 location:" + Snack2Location;
-                    sendDataToAllClients(data);
+                    isSnack1 = false;
+                    createNewSnackLocations();
                 }
                 else if (receivedText.Contains("Ready"))
                 {
@@ -206,31 +250,10 @@ public class Server : MonoBehaviour
         udpClient.Send(data, data.Length, IP, UDP_PORT);        
     }
 
-   private string createNewSnackLocations()
+   private void createNewSnackLocations()
     {
-        int minX = -19;
-        int maxX = 19;
-        int minY = -19;
-        int maxY= 19;
+        shouldCreateNewLocations = true;
 
-        int newSnackX = UnityEngine.Random.Range(minX, maxX);
-        int newSnackY = UnityEngine.Random.Range(minY, maxY);
-
-        bool locationValid = false;
-        while(!locationValid)
-        {
-            locationValid = true;
-
-            foreach (Vector2 position in Player1Locations)
-                if (newSnackX == Mathf.RoundToInt(position.x) && newSnackY == Mathf.RoundToInt(position.y))
-                    locationValid = false;
-
-            foreach (Vector2 position in Player2Locations)
-                if (newSnackX == Mathf.RoundToInt(position.x) && newSnackY == Mathf.RoundToInt(position.y))
-                    locationValid = false;
-        }
-
-        return newSnackX + "," + newSnackY;
     }
 
     private void OnApplicationQuit()
