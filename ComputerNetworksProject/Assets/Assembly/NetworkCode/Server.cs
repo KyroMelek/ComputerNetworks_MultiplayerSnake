@@ -23,8 +23,8 @@ public class Server : MonoBehaviour
     Thread serverThread;
 
     //Update when eaten
-    public Vector2 Snack1Location { get; private set; } = new Vector2();
-    public Vector2 Snack2Location { get; private set; } = new Vector2();
+    public string Snack1Location { get; private set; }
+    public string Snack2Location { get; private set; }
 
     //Update every frame
     public List<Vector2> Player1Locations { get; private set; } = new List<Vector2>();
@@ -107,13 +107,13 @@ public class Server : MonoBehaviour
                 else if (receivedText.Contains("Snack1"))
                 {
                     Snack1Location = createNewSnackLocations();
-                    string data = "Snack1 location:" + Snack1Location.ToString();
+                    string data = "Snack1 location:" + Snack1Location;
                     sendDataToAllClients(data);
                 }
                 else if (receivedText.Contains("Snack2"))
                 {
                     Snack2Location = createNewSnackLocations();
-                    string data = "Snack2 location:" + Snack2Location.ToString();
+                    string data = "Snack2 location:" + Snack2Location;
                     sendDataToAllClients(data);
                 }
                 else if (receivedText.Contains("Ready"))
@@ -206,19 +206,31 @@ public class Server : MonoBehaviour
         udpClient.Send(data, data.Length, IP, UDP_PORT);        
     }
 
-    private Vector2 createNewSnackLocations()
+   private string createNewSnackLocations()
     {
-        //TODO: Get actual play area borders from Nathan
-        //TODO: Add checks to ensure snack doesn't spawn in existing snake coords
-        float minY = 0;
-        float maxY= 10;
+        int minX = -19;
+        int maxX = 19;
+        int minY = -19;
+        int maxY= 19;
 
-        float minX = 0;
-        float maxX = 10;
-        float newSnackY = UnityEngine.Random.Range(minY, maxY);
-        float newSnackX = UnityEngine.Random.Range(minX, maxX);
+        int newSnackX = UnityEngine.Random.Range(minX, maxX);
+        int newSnackY = UnityEngine.Random.Range(minY, maxY);
 
-        return new Vector2(newSnackX, newSnackY);
+        bool locationValid = false;
+        while(!locationValid)
+        {
+            locationValid = true;
+
+            foreach (Vector2 position in Player1Locations)
+                if (newSnackX == Mathf.RoundToInt(position.x) && newSnackY == Mathf.RoundToInt(position.y))
+                    locationValid = false;
+
+            foreach (Vector2 position in Player2Locations)
+                if (newSnackX == Mathf.RoundToInt(position.x) && newSnackY == Mathf.RoundToInt(position.y))
+                    locationValid = false;
+        }
+
+        return newSnackX + "," + newSnackY;
     }
 
     private void OnApplicationQuit()

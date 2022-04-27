@@ -8,9 +8,8 @@ public class Renderer : MonoBehaviour
 
     private int previousSnakeLength = 0;
     public EnemySnake snake;
-    public GameObject opposingSnakeHead;
-    public GameObject opposingSnakeBody;
     public GameObject Snack;
+    public GameObject Snack2;
     List<Vector2> snakeCoords = new List<Vector2>();
 
     bool shouldRender = false;
@@ -77,8 +76,16 @@ public class Renderer : MonoBehaviour
         shouldRender = true;        
     }
 
-    public void recieveAndRenderSnackCoords(Vector2 snackCoords)
+    public void recieveAndRenderSnackCoords(Vector2 snackCoords, bool isSnack1)
     {
-       // snackSpriteRenderer.transform.position = snackCoords;
+        if(isSnack1)
+        {
+            Snack.transform.position = new Vector3(snackCoords.x, snackCoords.y, 0);            
+        }
+        else 
+        {
+            Snack2.transform.position = new Vector3(snackCoords.x, snackCoords.y, 0);
+        }
+
     }
 }

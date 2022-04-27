@@ -100,13 +100,13 @@ public class Client : MonoBehaviour
                 {
                     string[] snackCoords = receivedText.Split(':')[1].Split(',');
                     Vector2 Snack1 = new Vector2(int.Parse(snackCoords[0]), int.Parse(snackCoords[1]));
-                    renderer.recieveAndRenderSnackCoords(Snack1);
+                    renderer.recieveAndRenderSnackCoords(Snack1, true);
                 }
                 else if (receivedText.Contains("Snack2 location:")) //This means if player 1 (host) is joining this server -This always happens first
                 {
                     string[] snackCoords = receivedText.Split(':')[1].Split(',');
                     Vector2 Snack2 = new Vector2(int.Parse(snackCoords[0]), int.Parse(snackCoords[1]));
-                    renderer.recieveAndRenderSnackCoords(Snack2);
+                    renderer.recieveAndRenderSnackCoords(Snack2, false);
                 }
                 else if (receivedText.Contains("UserName"))
                 {

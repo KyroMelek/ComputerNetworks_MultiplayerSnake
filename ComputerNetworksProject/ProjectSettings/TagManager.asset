@@ -10,6 +10,7 @@ TagManager:
   - Snack
   - Wall
   - Player Head
+  - Snack2
   layers:
   - Default
   - TransparentFX
