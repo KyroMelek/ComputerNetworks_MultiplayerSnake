@@ -52,6 +52,10 @@ public class UIController : MonoBehaviour
     [Header("Menu")]
     public GameObject connectingMenu;
     public GameObject lobbyMenu;
+    public GameObject canvasContainer;
+
+    [Header("Game")]
+    public GameObject gameContainer;
 
     private string localIP;
 
@@ -60,6 +64,8 @@ public class UIController : MonoBehaviour
 
     private bool player1Ready = false;
     private bool player2Ready = false;
+
+    private bool startGame = false;
 
     private string opponentUserName;
     private bool isClient = false;
@@ -110,24 +116,12 @@ public class UIController : MonoBehaviour
             ReadyIconClient.SetActive(true);
             player2Ready = false;
         }
-
+        if (startGame)
+        {
+            canvasContainer.SetActive(false);
+            gameContainer.SetActive(true);
+        }
     }
-
-
-    //public void submitUserName(string user)
-    //{
-    //    userName = user;
-    //}
-
-    //public void submitHostIP(string IP)
-    //{
-    //    hostIP = IP;
-    //}
-
-    //public void submitHostPort(string Port)
-    //{
-    //    hostPort = Port;
-    //}
 
     public void createLobby()
     {
@@ -229,5 +223,10 @@ public class UIController : MonoBehaviour
             player1Ready = true;
         else
             player2Ready = true;
+    }
+
+    public void StartGame()
+    {
+        startGame = true;
     }
 }

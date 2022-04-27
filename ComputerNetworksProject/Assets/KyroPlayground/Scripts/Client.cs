@@ -22,8 +22,6 @@ public class Client : MonoBehaviour
     Renderer renderer;
     UIController uiController;
 
-    public bool startGame = false;
-
     public static Client theClient { get; private set; }
     private void Awake()
     {
@@ -118,8 +116,8 @@ public class Client : MonoBehaviour
                         uiController.serverResponseRecieved(opponentUserName, false);
                 }
                 else if (receivedText.Contains("Start"))
-                {
-                    startGame = true;
+                {                    
+                    uiController.StartGame();
                 }
                 else if (receivedText.Contains("Ready"))
                 {
