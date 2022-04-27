@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Menu
+  - Player Body
+  - Enemy Player Head
+  - Snack
+  - Wall
   layers:
   - Default
   - TransparentFX

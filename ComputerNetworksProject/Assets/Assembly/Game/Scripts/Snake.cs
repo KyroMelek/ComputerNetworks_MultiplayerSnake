@@ -39,6 +39,7 @@ public class Snake : MonoBehaviour
 
         calculatedSpeed = baseSpeed - speedPerBlock * size;
         timer = calculatedSpeed;
+        Debug.Log("Timer on awake: " + timer);
 
         isAlive = true;
     }
@@ -57,7 +58,7 @@ public class Snake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        calculatedSpeed = baseSpeed - speedPerBlock * size;
+        calculatedSpeed = baseSpeed - speedPerBlock * size;      
 
         if (!started && !moving && Input.anyKey)
         {
@@ -67,14 +68,14 @@ public class Snake : MonoBehaviour
 
         if (started && moving)
         {
-            if(Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                if(direction != Direction.SOUTH)
+                if (direction != Direction.SOUTH)
                 {
                     direction = Direction.NORTH;
                 }
             }
-            else if(Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 if (direction != Direction.NORTH)
                 {
@@ -96,17 +97,22 @@ public class Snake : MonoBehaviour
                 }
             }
 
+            Debug.Log("Timer is Before: " + timer);
             timer -= Time.deltaTime;
-            if(timer <= 0)
+            Debug.Log("Timer is during: " + timer);
+            Debug.Log("Calc speed: " + calculatedSpeed);
+            if (timer <= 0)
             {
                 moveSnake();
                 timer = calculatedSpeed;
+                Debug.Log("Timer is After: " + timer);
             }
         }
     }
 
     private void moveSnake()
     {
+        Debug.Log("Move snake called");
         int startingX = x;
         int startingY = y;
 
@@ -164,7 +170,6 @@ public class Snake : MonoBehaviour
     public void addBodySegment(Vector2 position)
     {
         bodySegmentObjects.Add(Instantiate(bodySegmentPrefab, position, Quaternion.identity, bodySegmentContainer.transform));
-        size++;
     }
 
     public void kill()

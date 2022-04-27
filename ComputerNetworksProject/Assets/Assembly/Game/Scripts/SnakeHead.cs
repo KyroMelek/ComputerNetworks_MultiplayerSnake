@@ -20,6 +20,7 @@ public class SnakeHead : MonoBehaviour
         else if (collision.CompareTag("Snack"))
         {
             snake.addBodySegment(snake.positionBehindLastSegment);
+            snake.size++;
         }
     }
 }

@@ -79,12 +79,14 @@ MonoBehaviour:
   headSegment: {fileID: 2277883984025052489}
   bodySegmentContainer: {fileID: 2277883984928748639}
   bodySegmentPrefab: {fileID: 6417752908048870283, guid: 9cc2fd52cb603124db9fe4e6d3dbe99e, type: 3}
+  positionBehindLastSegment: {x: 0, y: 0}
   x: 0
   y: 0
   size: 4
   baseSpeed: 0.2
   speedPerBlock: 0.01
   direction: 2
+  isAlive: 0
 --- !u!50 &2277883985188366603
 Rigidbody2D:
   serializedVersion: 4
@@ -113,6 +115,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2277883985188366601}
     m_Modifications:
+    - target: {fileID: 857706498217726791, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: snake
+      value: 
+      objectReference: {fileID: 2277883985188366602}
     - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
       propertyPath: m_RootOrder
       value: 0
