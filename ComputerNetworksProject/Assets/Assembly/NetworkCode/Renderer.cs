@@ -6,11 +6,10 @@ public class Renderer : MonoBehaviour
 {
     public static Renderer theRenderer { get; private set; }
 
-    private int previousSnakeLength = 0;
     public EnemySnake snake;
     public GameObject opposingSnakeHead;
     public GameObject opposingSnakeBody;
-    public GameObject Snack;
+    public GameObject[] snacks = new GameObject[2];
     List<Vector2> snakeCoords = new List<Vector2>();
 
     bool shouldRender = false;
@@ -77,8 +76,18 @@ public class Renderer : MonoBehaviour
         shouldRender = true;        
     }
 
-    public void recieveAndRenderSnackCoords(Vector2 snackCoords)
+    public void recieveAndRenderSnackCoords(Vector2 snackCoords, int snack)
     {
-       // snackSpriteRenderer.transform.position = snackCoords;
+        Debug.Log("receiveAndRenderSnackCoords");
+        if (snack == 1)
+        {
+            Instantiate(snacks[0], snackCoords, Quaternion.Euler(0, 0, 0));
+            Debug.Log("Snack 1 position" + snackCoords.ToString());
+        }
+        else
+        {
+            Instantiate(snacks[1], snackCoords, Quaternion.Euler(0, 0, 0));
+            Debug.Log("Snack 2 Position" + snackCoords.ToString());
+        }
     }
 }

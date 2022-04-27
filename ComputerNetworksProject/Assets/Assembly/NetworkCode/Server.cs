@@ -106,14 +106,18 @@ public class Server : MonoBehaviour
                 //Third case, snack 1 or 2 has been eaten. recievedText = "Snack1" or "Snack2"                    
                 else if (receivedText.Contains("Snack1"))
                 {
+                    Debug.Log("Snack1 Received by server");
                     Snack1Location = createNewSnackLocations();
                     string data = "Snack1 location:" + Snack1Location.ToString();
+                    Debug.Log(data);
                     sendDataToAllClients(data);
                 }
                 else if (receivedText.Contains("Snack2"))
                 {
+                    Debug.Log("Snack2 Received by server");
                     Snack2Location = createNewSnackLocations();
                     string data = "Snack2 location:" + Snack2Location.ToString();
+                    Debug.Log(data);
                     sendDataToAllClients(data);
                 }
                 else if (receivedText.Contains("Ready"))
