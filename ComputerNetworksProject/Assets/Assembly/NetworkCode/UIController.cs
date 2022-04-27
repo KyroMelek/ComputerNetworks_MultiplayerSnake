@@ -58,6 +58,9 @@ public class UIController : MonoBehaviour
     public GameObject canvasContainer;
     private GameObject previousMenu;
 
+    public GameObject winScreen;
+    public GameObject loseScreen;
+
     [Header("Game")]
     public GameObject gameContainer;
 
@@ -262,5 +265,12 @@ public class UIController : MonoBehaviour
     {
         previousMenu.SetActive(true);
         lobbyMenu.SetActive(false);
+    }
+
+    public void returnToMain()
+    {
+        winScreen.SetActive(false);
+        loseScreen.SetActive(false);
+        mainMenu.SetActive(true);
     }
 }

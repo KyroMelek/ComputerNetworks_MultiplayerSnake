@@ -14,6 +14,10 @@ public class Snake : MonoBehaviour
     private List<GameObject> bodySegmentObjects;
     public Vector2 positionBehindLastSegment;
 
+    public int startingX = 0;
+    public int startingY = 0;
+    public int startingSize = 4;
+
     public int x = 10;
     public int y = 20;
 
@@ -54,6 +58,11 @@ public class Snake : MonoBehaviour
         {
             addBodySegment(new Vector2(-i - 1, 0));
         }
+    }
+
+    public void OnEnable()
+    {
+        resetSnake();
     }
 
     // Update is called once per frame
@@ -181,6 +190,33 @@ public class Snake : MonoBehaviour
         moving = false;
 
         sendDeathStatus();
+
+        uiController.gameContainer.SetActive(false);
+        uiController.loseScreen.SetActive(true);
+    }
+
+    public void resetSnake()
+    {
+        foreach (GameObject go in bodySegmentObjects)
+            Destroy(go);
+
+        bodySegmentObjects.Clear();
+
+        x = startingX;
+        y = startingY;
+        size = startingSize;
+
+        calculatedSpeed = baseSpeed - speedPerBlock * size;
+        timer = calculatedSpeed;
+
+        isAlive = true;
+        started = false;
+        moving = false;
+
+        for (int i = 0; i < size; i++)
+        {
+            addBodySegment(new Vector2(-i - 1, 0));
+        }
     }
 
     //place in player movement code
@@ -203,6 +239,7 @@ public class Snake : MonoBehaviour
         var data = Encoding.UTF8.GetBytes(stringToSend);
         udpClient.Send(data, data.Length, uiController.hostIP, 7700);
     }
+
     //place in player collision code
     //Need to add a flag to collision code to determine which snack was eaten (1 or 2)
     public void sendSnackStatus(string whichSnack)

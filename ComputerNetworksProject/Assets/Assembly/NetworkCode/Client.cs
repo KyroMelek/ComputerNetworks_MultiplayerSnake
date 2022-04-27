@@ -133,7 +133,8 @@ public class Client : MonoBehaviour
                 }
                 else if (receivedText.Contains("Dead"))
                 {
-                    // declare victory
+                    uiController.gameContainer.SetActive(false);
+                    uiController.winScreen.SetActive(true);
                 }
 
             }
