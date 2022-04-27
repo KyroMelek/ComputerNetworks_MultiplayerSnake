@@ -12,7 +12,7 @@ public class Snake : MonoBehaviour
     public GameObject bodySegmentContainer;
     public GameObject bodySegmentPrefab;
     private List<GameObject> bodySegmentObjects;
-    private Vector2 positionBehindLastSegment;
+    public Vector2 positionBehindLastSegment;
 
     public int x = 10;
     public int y = 20;
@@ -28,6 +28,8 @@ public class Snake : MonoBehaviour
     private bool started;
     private bool moving;
 
+    public bool isAlive;
+
     private void Awake()
     {
         bodySegmentObjects = new List<GameObject>();
@@ -37,6 +39,8 @@ public class Snake : MonoBehaviour
 
         calculatedSpeed = baseSpeed - speedPerBlock * size;
         timer = calculatedSpeed;
+
+        isAlive = true;
     }
 
     // Start is called before the first frame update
@@ -157,14 +161,16 @@ public class Snake : MonoBehaviour
         sendLocations(snakeLocations);
     }
 
-    private void addBodySegment(Vector2 position)
+    public void addBodySegment(Vector2 position)
     {
         bodySegmentObjects.Add(Instantiate(bodySegmentPrefab, position, Quaternion.identity, bodySegmentContainer.transform));
+        size++;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) // this will fire from the children if the parent is the one with the rigidbody; thus, get rid of children's rigidbodies
+    public void kill()
     {
-        addBodySegment(positionBehindLastSegment);
+        isAlive = false;
+        moving = false;
     }
 
     //place in player movement code
