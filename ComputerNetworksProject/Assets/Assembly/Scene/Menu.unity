@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2557,6 +2557,7 @@ GameObject:
   - component: {fileID: 389208927}
   - component: {fileID: 389208926}
   - component: {fileID: 389208923}
+  - component: {fileID: 389208928}
   m_Layer: 0
   m_Name: MenuController
   m_TagString: Untagged
@@ -2615,6 +2616,7 @@ MonoBehaviour:
   HostIPField: {fileID: 910212759}
   HostPortFieldJoin: {fileID: 278424124}
   LobbyName: {fileID: 1693282488}
+  LobbyMenu: {fileID: 328991398}
   userInfoHost: {fileID: 1405471953}
   userNameHostLobby: {fileID: 260420169}
   HostIP: {fileID: 629843680}
@@ -2664,6 +2666,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P1Ready: 0
   P2Ready: 0
+--- !u!114 &389208928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389208922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19e61638247c4316998c3966537ce64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snake: {fileID: 1499269661}
+  snakeEnemy: {fileID: 549513060}
 --- !u!1 &484901124
 GameObject:
   m_ObjectHideFlags: 0
@@ -2940,6 +2956,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &549513060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2661038477000959360, guid: 5db9d0e0a65194429b2239d83f996a2e, type: 3}
+  m_PrefabInstance: {fileID: 1939579785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &555627431
 GameObject:
   m_ObjectHideFlags: 0
@@ -6472,18 +6493,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1279774716}
     m_Modifications:
-    - target: {fileID: 2277883984025052490, guid: 5cc064d7484a7154aac032572163b739, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277883984025052490, guid: 5cc064d7484a7154aac032572163b739, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277883984025052490, guid: 5cc064d7484a7154aac032572163b739, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2277883985188366600, guid: 5cc064d7484a7154aac032572163b739, type: 3}
       propertyPath: m_Name
       value: Snake
@@ -7795,6 +7804,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481500735}
   m_CullTransparentMesh: 1
+--- !u!1 &1499269661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2277883985188366600, guid: 5cc064d7484a7154aac032572163b739, type: 3}
+  m_PrefabInstance: {fileID: 1099444650}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1499355311
 GameObject:
   m_ObjectHideFlags: 0
@@ -9691,7 +9705,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4094433754568197832, guid: 5db9d0e0a65194429b2239d83f996a2e, type: 3}
   m_PrefabInstance: {fileID: 1939579785}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 549513060}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae10d229d24e52c4fa30a29b1cc28599, type: 3}

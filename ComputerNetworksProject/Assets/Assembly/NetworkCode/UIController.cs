@@ -28,7 +28,8 @@ public class UIController : MonoBehaviour
 
     //Lobby Menu
     [Header("Lobby Menu")]
-    public TMP_Text LobbyName;        
+    public TMP_Text LobbyName;
+    public GameObject LobbyMenu;
 
     //Lobby Menu Host Info
     [Header("Lobby Menu Host Info")]
@@ -61,6 +62,7 @@ public class UIController : MonoBehaviour
     public GameObject winScreen;
     public GameObject loseScreen;
 
+
     [Header("Game")]
     public GameObject gameContainer;
 
@@ -72,7 +74,7 @@ public class UIController : MonoBehaviour
     private bool player1Ready = false;
     private bool player2Ready = false;
 
-    private bool startGame = false;
+    private bool startGame = false;   
 
     private string opponentUserName;
     private bool isClient = false;
@@ -125,8 +127,10 @@ public class UIController : MonoBehaviour
         }
         if (startGame)
         {
+            lobbyMenu.SetActive(false);
             canvasContainer.SetActive(false);
             gameContainer.SetActive(true);
+            startGame = false;
         }
     }
 

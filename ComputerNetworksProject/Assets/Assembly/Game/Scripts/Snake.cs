@@ -33,7 +33,7 @@ public class Snake : MonoBehaviour
     private bool started;
     private bool moving;
 
-    public bool isAlive;
+    public bool isAlive = true;
 
     private void Awake()
     {
@@ -189,10 +189,7 @@ public class Snake : MonoBehaviour
         isAlive = false;
         moving = false;
 
-        sendDeathStatus();
-
-        uiController.gameContainer.SetActive(false);
-        uiController.loseScreen.SetActive(true);
+        //sendDeathStatus();
     }
 
     public void resetSnake()
@@ -251,13 +248,13 @@ public class Snake : MonoBehaviour
         udpClient.Send(data, data.Length, uiController.hostIP, 7700);
     }
 
-    public void sendDeathStatus()
-    {
-        string stringToSend = uiController.userName + ":Dead";
-        int UDP_PORT = 7700;
-        UdpClient udpClient = new UdpClient();
+    //public void sendDeathStatus()
+    //{
+    //    string stringToSend = uiController.userName + ":Dead";
+    //    int UDP_PORT = 7700;
+    //    UdpClient udpClient = new UdpClient();
 
-        var data = Encoding.UTF8.GetBytes(stringToSend);
-        udpClient.Send(data, data.Length, uiController.hostIP, UDP_PORT);
-    }
+    //    var data = Encoding.UTF8.GetBytes(stringToSend);
+    //    udpClient.Send(data, data.Length, uiController.hostIP, UDP_PORT);
+    //}
 }

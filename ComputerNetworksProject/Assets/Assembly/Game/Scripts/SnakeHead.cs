@@ -24,5 +24,6 @@ public class SnakeHead : MonoBehaviour
             snake.addBodySegment(snake.positionBehindLastSegment);
             snake.size++;
         }
+              
     }
 }

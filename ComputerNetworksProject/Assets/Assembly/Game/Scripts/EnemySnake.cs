@@ -29,7 +29,7 @@ public class EnemySnake : MonoBehaviour
     private bool started;
     private bool moving;
 
-    public bool isAlive;
+    public bool isAlive = true;
 
     private void Awake()
     {

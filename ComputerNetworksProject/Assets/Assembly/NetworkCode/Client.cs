@@ -131,11 +131,6 @@ public class Client : MonoBehaviour
                         uiController.setReadyStatus(2);
                     }
                 }
-                else if (receivedText.Contains("Dead"))
-                {
-                    uiController.gameContainer.SetActive(false);
-                    uiController.winScreen.SetActive(true);
-                }
 
             }
             catch (ObjectDisposedException)

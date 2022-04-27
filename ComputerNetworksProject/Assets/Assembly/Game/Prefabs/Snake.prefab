@@ -80,6 +80,9 @@ MonoBehaviour:
   bodySegmentContainer: {fileID: 2277883984928748639}
   bodySegmentPrefab: {fileID: 6417752908048870283, guid: 9cc2fd52cb603124db9fe4e6d3dbe99e, type: 3}
   positionBehindLastSegment: {x: 0, y: 0}
+  startingX: 0
+  startingY: 0
+  startingSize: 4
   x: 0
   y: 0
   size: 4
@@ -87,7 +90,7 @@ MonoBehaviour:
   speedPerBlock: 0.01
   direction: 2
   targetDirection: 2
-  isAlive: 0
+  isAlive: 1
 --- !u!50 &2277883985188366603
 Rigidbody2D:
   serializedVersion: 4
@@ -126,15 +129,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.09
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.939612
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2590313686761811589, guid: 20655541db90c2641963d25c75885331, type: 3}
       propertyPath: m_LocalRotation.w

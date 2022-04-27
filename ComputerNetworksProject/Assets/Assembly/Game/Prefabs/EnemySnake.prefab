@@ -57,7 +57,7 @@ MonoBehaviour:
   speedPerBlock: 0.01
   direction: 3
   targetDirection: 3
-  isAlive: 0
+  isAlive: 1
 --- !u!50 &2661038477000959363
 Rigidbody2D:
   serializedVersion: 4
