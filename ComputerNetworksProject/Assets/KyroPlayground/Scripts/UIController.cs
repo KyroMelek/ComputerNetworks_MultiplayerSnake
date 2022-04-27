@@ -58,6 +58,9 @@ public class UIController : MonoBehaviour
     private bool isServerResponseRecieved = false;
     private bool readyToWriteTextFields = false;
 
+    private bool player1Ready = false;
+    private bool player2Ready = false;
+
     private string opponentUserName;
     private bool isClient = false;
 
@@ -94,6 +97,20 @@ public class UIController : MonoBehaviour
 
             StartCoroutine(setText(opponentUserName, isClient));
         }
+
+        if (player1Ready)
+        {
+            NotReadyIconHost.SetActive(false);
+            ReadyIconHost.SetActive(true);
+            player1Ready = false;
+        }
+        if (player2Ready)
+        {
+            NotReadyIconClient.SetActive(false);
+            ReadyIconClient.SetActive(true);
+            player2Ready = false;
+        }
+
     }
 
 
@@ -195,15 +212,9 @@ public class UIController : MonoBehaviour
 
     public void setReadyStatus(int player)
     {
-        if (player == 1)
-        {
-            NotReadyIconHost.SetActive(false);
-            ReadyIconHost.SetActive(true);
-        }
+        if (player == 1)        
+            player1Ready = true;
         else
-        {
-            NotReadyIconClient.SetActive(false);
-            ReadyIconClient.SetActive(true);
-        }
+            player2Ready = true;
     }
 }
