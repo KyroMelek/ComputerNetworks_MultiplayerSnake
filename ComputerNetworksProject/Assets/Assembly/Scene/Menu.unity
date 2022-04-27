@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2173,6 +2173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219f37b34d74b4795a6bc77c7fc1ea94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snake: {fileID: 1939579787}
   opposingSnakeHead: {fileID: 21300000, guid: f10297e208d89ec4099f980f1c21b001, type: 3}
   opposingSnakeBody: {fileID: 21300000, guid: 1daca6dc19b233d40a54e90a14bec450, type: 3}
   Snack: {fileID: 21300000, guid: 9c3326624c4988447835561789a553cb, type: 3}
@@ -8663,6 +8664,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2661038477000959361, guid: 5db9d0e0a65194429b2239d83f996a2e, type: 3}
   m_PrefabInstance: {fileID: 1939579785}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1939579787 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4094433754568197832, guid: 5db9d0e0a65194429b2239d83f996a2e, type: 3}
+  m_PrefabInstance: {fileID: 1939579785}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae10d229d24e52c4fa30a29b1cc28599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1958500283
 PrefabInstance:
   m_ObjectHideFlags: 0

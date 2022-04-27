@@ -7,6 +7,7 @@ public class Renderer : MonoBehaviour
     public static Renderer theRenderer { get; private set; }
 
     private int previousSnakeLength = 0;
+    public EnemySnake snake;
     public GameObject opposingSnakeHead;
     public GameObject opposingSnakeBody;
     public GameObject Snack;
@@ -34,28 +35,7 @@ public class Renderer : MonoBehaviour
     {
         if (shouldRender)
         {
-            for (int i = previousSnakeLength; i < snakeCoords.Count; ++i)
-            {
-                
-                if (i == 0)
-                {
-                    head = Instantiate(opposingSnakeHead);
-                }
-                else
-                {
-                    body.Add(Instantiate(opposingSnakeBody));
-                }
-
-            }
-            head.transform.rotation = getOpposingSnakeRotationFromCoords(snakeCoords);
-            head.transform.position = snakeCoords[0];
-
-            for (int i = 0; i < snakeCoords.Count - 1; ++i)
-            {
-                body[i].transform.position = snakeCoords[++i];
-            }
-            previousSnakeLength = snakeCoords.Count;
-
+            snake.updatePositions(snakeCoords, getOpposingSnakeRotationFromCoords(snakeCoords));
             shouldRender = false;
         }
     }

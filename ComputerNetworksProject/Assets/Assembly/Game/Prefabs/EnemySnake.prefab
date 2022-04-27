@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2661038477000959361}
-  - component: {fileID: 2661038477000959362}
+  - component: {fileID: 4094433754568197832}
   - component: {fileID: 2661038477000959363}
   m_Layer: 0
   m_Name: EnemySnake
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2661038477000959362
+--- !u!114 &4094433754568197832
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,20 +43,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2661038477000959360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68c203c98b267e94fbccf7e3e822b5a1, type: 3}
+  m_Script: {fileID: 11500000, guid: ae10d229d24e52c4fa30a29b1cc28599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   headSegment: {fileID: 5593474573097341218}
   bodySegmentContainer: {fileID: 2661038477260847319}
   bodySegmentPrefab: {fileID: 7130296724531111912, guid: 25ded6afeb975425eafcab58bdc6aae8, type: 3}
   positionBehindLastSegment: {x: 0, y: 0}
-  x: 0
+  x: 5
   y: 0
   size: 4
   baseSpeed: 0.2
   speedPerBlock: 0.01
-  direction: 2
-  targetDirection: 2
+  direction: 3
+  targetDirection: 3
   isAlive: 0
 --- !u!50 &2661038477000959363
 Rigidbody2D:
