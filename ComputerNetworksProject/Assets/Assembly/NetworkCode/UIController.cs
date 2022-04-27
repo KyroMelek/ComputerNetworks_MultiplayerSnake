@@ -11,7 +11,7 @@ public class UIController : MonoBehaviour
     Server server;
     Client client;
 
-    private string userName; //This local user
+    public string userName; //This local user
     public string hostIP;   //IP of the user hosting the server
     public string hostPort; //Port the host server is being hosted on
 

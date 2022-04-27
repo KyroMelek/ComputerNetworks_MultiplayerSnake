@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class EnemySnakeHead : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public EnemySnake snake;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision) // this will fire from the children if the parent is the one with the rigidbody; thus, get rid of children's rigidbodies
     {
-        
+        //Debug.Log("Collision Happened");
+
+        if (collision.CompareTag("Player Body") || collision.CompareTag("Wall"))
+        {
+            snake.kill();
+        }
+        else if (collision.CompareTag("Player Head"))
+        {
+            if (snake.size <= collision.gameObject.GetComponent<SnakeHead>().snake.size)
+                snake.kill();
+        }
+        else if (collision.CompareTag("Snack"))
+        {
+            snake.addBodySegment(snake.positionBehindLastSegment);
+            snake.size++;
+        }
     }
 }

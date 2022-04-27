@@ -130,11 +130,33 @@ public class Server : MonoBehaviour
                         P2Ready = true;
                         sendDataToClient("P2Ready", Player1.Key);
                     }
+
                     if (P1Ready && P2Ready)
                     {
                         sendDataToAllClients("Start");
                     }
                 }
+                else if (receivedText.Contains("Dead"))
+                {
+                    string[] playerReadyStatus = receivedText.Split(':');
+                    if (playerReadyStatus[0] == Player1.Value)
+                    {
+                        P1Ready = true;
+                        if (Player2.Key != null)
+                            sendDataToClient("P1Dead", Player2.Key);
+                    }
+                    else if (playerReadyStatus[0] == Player2.Value)
+                    {
+                        P2Ready = true;
+                        sendDataToClient("P2Dead", Player1.Key);
+                    }
+
+                    if (P1Ready && P2Ready)
+                    {
+                        sendDataToAllClients("Game Over");
+                    }
+                }
+
                 //Fourth case, recievedText = player coordinates
                 
             }
@@ -146,7 +168,6 @@ public class Server : MonoBehaviour
             catch (Exception err)
             {
                 Debug.Log("UDP Exception: " + err.ToString());
-
             }
         }
     }

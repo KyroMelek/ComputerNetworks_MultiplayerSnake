@@ -86,6 +86,7 @@ MonoBehaviour:
   baseSpeed: 0.2
   speedPerBlock: 0.01
   direction: 2
+  targetDirection: 2
   isAlive: 0
 --- !u!50 &2277883985188366603
 Rigidbody2D:
@@ -166,6 +167,10 @@ PrefabInstance:
     - target: {fileID: 2590313686761811590, guid: 20655541db90c2641963d25c75885331, type: 3}
       propertyPath: m_Name
       value: Snake Head Segment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590313686761811590, guid: 20655541db90c2641963d25c75885331, type: 3}
+      propertyPath: m_TagString
+      value: Player Head
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20655541db90c2641963d25c75885331, type: 3}

@@ -9,6 +9,7 @@ TagManager:
   - Enemy Player Head
   - Snack
   - Wall
+  - Player Head
   layers:
   - Default
   - TransparentFX

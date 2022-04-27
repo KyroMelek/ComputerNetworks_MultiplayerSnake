@@ -16,7 +16,7 @@ public class SnakeHead : MonoBehaviour
         }
         else if (collision.CompareTag("Enemy Player Head"))
         {
-            if (snake.size <= collision.gameObject.GetComponent<SnakeHead>().snake.size)
+            if (snake.size <= collision.gameObject.GetComponent<EnemySnakeHead>().snake.size)
                 snake.kill();
         }
         else if (collision.CompareTag("Snack"))

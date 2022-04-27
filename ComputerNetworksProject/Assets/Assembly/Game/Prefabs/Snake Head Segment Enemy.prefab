@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4836887511201776375}
   - component: {fileID: 6523658852111056353}
   - component: {fileID: 4836887511201776368}
-  - component: {fileID: 7725248439201464116}
+  - component: {fileID: 8162424641157296290}
   m_Layer: 0
   m_Name: Snake Head Segment Enemy
   m_TagString: Untagged
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
---- !u!114 &7725248439201464116
+--- !u!114 &8162424641157296290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4836887511201776373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aac98051babeebf4ab03841ef36891cb, type: 3}
+  m_Script: {fileID: 11500000, guid: b6ba280acee42814f9f3daa4475e3278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   snake: {fileID: 0}

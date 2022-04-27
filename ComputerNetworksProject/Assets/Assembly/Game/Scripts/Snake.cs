@@ -179,6 +179,8 @@ public class Snake : MonoBehaviour
     {
         isAlive = false;
         moving = false;
+
+        sendDeathStatus();
     }
 
     //place in player movement code
@@ -210,5 +212,15 @@ public class Snake : MonoBehaviour
         Debug.Log(stringToSend);
         var data = Encoding.UTF8.GetBytes(stringToSend);
         udpClient.Send(data, data.Length, uiController.hostIP, 7700);
+    }
+
+    public void sendDeathStatus()
+    {
+        string stringToSend = uiController.userName + ":Dead";
+        int UDP_PORT = 7700;
+        UdpClient udpClient = new UdpClient();
+
+        var data = Encoding.UTF8.GetBytes(stringToSend);
+        udpClient.Send(data, data.Length, uiController.hostIP, UDP_PORT);
     }
 }
