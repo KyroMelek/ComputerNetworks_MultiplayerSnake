@@ -50,9 +50,13 @@ public class UIController : MonoBehaviour
 
     //Menus
     [Header("Menu")]
+    public GameObject mainMenu;
+    public GameObject createLobbyMenu;
+    public GameObject joinLobbyMenu;
     public GameObject connectingMenu;
     public GameObject lobbyMenu;
     public GameObject canvasContainer;
+    private GameObject previousMenu;
 
     [Header("Game")]
     public GameObject gameContainer;
@@ -125,9 +129,17 @@ public class UIController : MonoBehaviour
 
     public void createLobby()
     {
+        previousMenu = createLobbyMenu;
 
         hostPort = HostPortField.text;
         userName = UserNameHostField.text;
+
+        if(string.IsNullOrWhiteSpace(hostPort) || string.IsNullOrWhiteSpace(userName))
+        {
+            createLobbyMenu.SetActive(true);
+            lobbyMenu.SetActive(false);
+            return;
+        }
 
         int UDP_PORT = int.Parse(hostPort);
 
@@ -152,11 +164,21 @@ public class UIController : MonoBehaviour
 
     public void joinLobby()
     {
-        client.startClient();
+        previousMenu = joinLobbyMenu;
 
         userName = UserNameClientField.text;
         hostIP = HostIPField.text;
         hostPort = HostPortFieldJoin.text;
+
+        if(string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(hostIP) || string.IsNullOrWhiteSpace(hostPort))
+        {
+            joinLobbyMenu.SetActive(true);
+            lobbyMenu.SetActive(false);
+            connectingMenu.SetActive(false);
+            return;
+        }
+
+        client.startClient();
         
         int UDP_PORT = int.Parse(hostPort);
         UdpClient udpClient = new UdpClient();
@@ -228,5 +250,17 @@ public class UIController : MonoBehaviour
     public void StartGame()
     {
         startGame = true;
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
+    }
+
+    public void BackToPreviousMenu()
+    {
+        previousMenu.SetActive(true);
+        lobbyMenu.SetActive(false);
     }
 }
