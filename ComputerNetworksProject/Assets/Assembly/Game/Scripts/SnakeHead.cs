@@ -8,7 +8,9 @@ public class SnakeHead : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) // this will fire from the children if the parent is the one with the rigidbody; thus, get rid of children's rigidbodies
     {
-        if (collision.CompareTag("Player Body") || collision.CompareTag("Enemy Player Body") || collision.CompareTag("Wall"))
+        //Debug.Log("Collision Happened");
+
+        if (collision.CompareTag("Player Body") || collision.CompareTag("Wall"))
         {
             snake.kill();
         }

@@ -24,6 +24,7 @@ public class Snake : MonoBehaviour
     private float timer;
 
     public Direction direction = Direction.EAST;
+    public Direction targetDirection = Direction.EAST;
 
     private bool started;
     private bool moving;
@@ -72,53 +73,55 @@ public class Snake : MonoBehaviour
             {
                 if (direction != Direction.SOUTH)
                 {
-                    direction = Direction.NORTH;
+                    targetDirection = Direction.NORTH;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 if (direction != Direction.NORTH)
                 {
-                    direction = Direction.SOUTH;
+                    targetDirection = Direction.SOUTH;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 if (direction != Direction.WEST)
                 {
-                    direction = Direction.EAST;
+                    targetDirection = Direction.EAST;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 if (direction != Direction.EAST)
                 {
-                    direction = Direction.WEST;
+                    targetDirection = Direction.WEST;
                 }
             }
 
-            Debug.Log("Timer is Before: " + timer);
+            //Debug.Log("Timer is Before: " + timer);
             timer -= Time.deltaTime;
-            Debug.Log("Timer is during: " + timer);
-            Debug.Log("Calc speed: " + calculatedSpeed);
+            //Debug.Log("Timer is during: " + timer);
+            //Debug.Log("Calc speed: " + calculatedSpeed);
             if (timer <= 0)
             {
                 moveSnake();
                 timer = calculatedSpeed;
-                Debug.Log("Timer is After: " + timer);
+                //Debug.Log("Timer is After: " + timer);
             }
         }
     }
 
     private void moveSnake()
     {
-        Debug.Log("Move snake called");
+        //Debug.Log("Move snake called");
         int startingX = x;
         int startingY = y;
 
         int endingX = Mathf.RoundToInt(bodySegmentObjects[bodySegmentObjects.Count - 1].transform.position.x);
         int endingY = Mathf.RoundToInt(bodySegmentObjects[bodySegmentObjects.Count - 1].transform.position.y);
         positionBehindLastSegment = new Vector2(endingX, endingY);
+
+        direction = targetDirection;
 
         switch (direction)
         {
