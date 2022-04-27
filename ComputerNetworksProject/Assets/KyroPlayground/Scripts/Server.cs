@@ -43,9 +43,9 @@ public class Server : MonoBehaviour
     }
 
 
-    public void startServer()
+    public void startServer(int port)
     {
-        listenServer = new UdpClient(7700);
+        listenServer = new UdpClient(port);
         serverThread = new Thread(() => listner(listenServer));
         serverThread.Start();
     }
@@ -122,10 +122,13 @@ public class Server : MonoBehaviour
                     if (playerReadyStatus[0] == Player1.Value)
                     {
                         P1Ready = true;
+                        if(Player2.Key != null)
+                            sendDataToClient("P1Ready", Player2.Key);
                     }
                     else if (playerReadyStatus[0] == Player2.Value)
                     {
                         P2Ready = true;
+                        sendDataToClient("P2Ready", Player1.Key);
                     }
                     if (P1Ready && P2Ready)
                     {
@@ -157,6 +160,8 @@ public class Server : MonoBehaviour
         string stringToSend = "UserNameHost:" + Player1.Value; //Username
         var data = Encoding.UTF8.GetBytes(stringToSend);
         udpClient.Send(data, data.Length, Player2.Key, UDP_PORT);
+        if(P1Ready)
+            sendDataToClient("P1Ready", Player2.Key);
 
         string stringToSend2 = "UserNameClient:" + Player2.Value; //Username
         var data2 = Encoding.UTF8.GetBytes(stringToSend2);
