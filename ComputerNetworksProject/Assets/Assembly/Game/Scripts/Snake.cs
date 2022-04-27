@@ -192,13 +192,14 @@ public class Snake : MonoBehaviour
             vectorListCSV += coord.y.ToString();
             vectorListCSV += ',';
         }
-        vectorListCSV.Remove(vectorListCSV.Length - 1);
-        Debug.Log(vectorListCSV);
-        string stringToSend = "PlayerLocations:" + vectorListCSV;       
+        string vectorListCSVChopped = vectorListCSV.Remove(vectorListCSV.Length - 1);
+        
+        Debug.Log(vectorListCSVChopped);
+        string stringToSend = "PlayerLocations:" + vectorListCSVChopped;       
         UdpClient udpClient = new UdpClient();
         Debug.Log(stringToSend);
         var data = Encoding.UTF8.GetBytes(stringToSend);
-        udpClient.Send(data, data.Length, uiController.hostIP, int.Parse(uiController.hostPort));
+        udpClient.Send(data, data.Length, uiController.hostIP, 7700);
     }
     //place in player collision code
     //Need to add a flag to collision code to determine which snack was eaten (1 or 2)
@@ -208,6 +209,6 @@ public class Snake : MonoBehaviour
         UdpClient udpClient = new UdpClient();
         Debug.Log(stringToSend);
         var data = Encoding.UTF8.GetBytes(stringToSend);
-        udpClient.Send(data, data.Length, uiController.hostIP, int.Parse(uiController.hostPort));
+        udpClient.Send(data, data.Length, uiController.hostIP, 7700);
     }
 }

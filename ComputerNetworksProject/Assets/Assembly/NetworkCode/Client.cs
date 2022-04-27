@@ -86,9 +86,10 @@ public class Client : MonoBehaviour
                 {
                     clientPlayerLocations.Clear();
                     string locations = receivedText.Split(':')[1];
+                    Debug.Log(locations);
                     string[] splitLocations = locations.Split(',');
                     int numOfCoords = splitLocations.GetLength(0);
-
+                    Debug.Log(numOfCoords);
                     for (int i = 0; i < numOfCoords; ++i)
                     {
                         clientPlayerLocations.Add(new Vector2(int.Parse(splitLocations[i]), int.Parse(splitLocations[++i])));
