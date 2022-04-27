@@ -152,6 +152,8 @@ public class UIController : MonoBehaviour
         userNameHostLobby.text = userName;        
         HostIP.text = localIP;
         userInfoPortHost.text = hostPort;
+
+        isClient = false;
     }
 
     public void joinLobby()
@@ -161,13 +163,13 @@ public class UIController : MonoBehaviour
         userName = UserNameClientField.text;
         hostIP = HostIPField.text;
         hostPort = HostPortFieldJoin.text;
-
         
         int UDP_PORT = int.Parse(hostPort);
         UdpClient udpClient = new UdpClient();
         string stringToSend = "UserName-Client:" + userName;
         var data = Encoding.UTF8.GetBytes(stringToSend);
-        udpClient.Send(data, data.Length, hostIP, UDP_PORT);        
+        udpClient.Send(data, data.Length, hostIP, UDP_PORT);
+        isClient = true;
     }
 
     public void serverResponseRecieved(string _UserName, bool _isClient)
@@ -208,6 +210,17 @@ public class UIController : MonoBehaviour
 
         var data = Encoding.UTF8.GetBytes(stringToSend);
         udpClient.Send(data, data.Length, hostIP, UDP_PORT);
+
+        if (!isClient)
+        {
+            NotReadyIconHost.SetActive(false);
+            ReadyIconHost.SetActive(true);
+        }
+        else 
+        {
+            NotReadyIconClient.SetActive(false);
+            ReadyIconClient.SetActive(true);
+        }
     }
 
     public void setReadyStatus(int player)
