@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
+using System.Text;
 using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
+    UIController uiController;
+
     public GameObject headSegment;
     public GameObject bodySegmentContainer;
     public GameObject bodySegmentPrefab;
@@ -38,6 +42,8 @@ public class Snake : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        uiController = UIController.theUIController;
+
         for(int i = 0; i < size; i++)
         {
             addBodySegment(new Vector2(-i - 1, 0));
@@ -141,6 +147,14 @@ public class Snake : MonoBehaviour
             bodySegmentObjects[i].transform.position = bodySegmentObjects[i - 1].transform.position;
 
         bodySegmentObjects[0].transform.position = new Vector2(startingX, startingY);
+
+        List<Vector2> snakeLocations = new List<Vector2>();
+        snakeLocations.Add(new Vector2(headSegment.transform.position.x, headSegment.transform.position.y));
+        for (int i = 0; i < bodySegmentObjects.Count; ++i)
+        {
+            snakeLocations.Add(new Vector2(bodySegmentObjects[i].transform.position.x, bodySegmentObjects[i].transform.position.y));
+        }
+        sendLocations(snakeLocations);
     }
 
     private void addBodySegment(Vector2 position)
@@ -151,5 +165,35 @@ public class Snake : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) // this will fire from the children if the parent is the one with the rigidbody; thus, get rid of children's rigidbodies
     {
         addBodySegment(positionBehindLastSegment);
+    }
+
+    //place in player movement code
+    public void sendLocations(List<Vector2> snake)
+    {
+        string vectorListCSV = "";
+        foreach (Vector2 coord in snake)
+        {
+            vectorListCSV += coord.x.ToString();
+            vectorListCSV += ',';
+            vectorListCSV += coord.y.ToString();
+            vectorListCSV += ',';
+        }
+        vectorListCSV.Remove(vectorListCSV.Length - 1);
+        Debug.Log(vectorListCSV);
+        string stringToSend = "PlayerLocations:" + vectorListCSV;       
+        UdpClient udpClient = new UdpClient();
+        Debug.Log(stringToSend);
+        var data = Encoding.UTF8.GetBytes(stringToSend);
+        udpClient.Send(data, data.Length, uiController.hostIP, int.Parse(uiController.hostPort));
+    }
+    //place in player collision code
+    //Need to add a flag to collision code to determine which snack was eaten (1 or 2)
+    public void sendSnackStatus(string whichSnack)
+    {
+        string stringToSend = whichSnack;        
+        UdpClient udpClient = new UdpClient();
+        Debug.Log(stringToSend);
+        var data = Encoding.UTF8.GetBytes(stringToSend);
+        udpClient.Send(data, data.Length, uiController.hostIP, int.Parse(uiController.hostPort));
     }
 }

@@ -12,8 +12,8 @@ public class UIController : MonoBehaviour
     Client client;
 
     private string userName; //This local user
-    private string hostIP;   //IP of the user hosting the server
-    private string hostPort; //Port the host server is being hosted on
+    public string hostIP;   //IP of the user hosting the server
+    public string hostPort; //Port the host server is being hosted on
 
     //Create Lobby menu
     [Header("Create Lobby menu")]
