@@ -165,14 +165,14 @@ public class Server : MonoBehaviour
                     string[] playerReadyStatus = receivedText.Split(':');
                     if (playerReadyStatus[0] == Player1.Value)
                     {
-                        P1Ready = true;
+                        P1Ready = bool.Parse(playerReadyStatus[2]);
                         if(Player2.Key != null)
-                            sendDataToClient("P1Ready", Player2.Key);
+                            sendDataToClient("P1Ready:" + P1Ready, Player2.Key);
                     }
                     else if (playerReadyStatus[0] == Player2.Value)
                     {
-                        P2Ready = true;
-                        sendDataToClient("P2Ready", Player1.Key);
+                        P2Ready = bool.Parse(playerReadyStatus[2]);
+                        sendDataToClient("P2Ready:" + P2Ready, Player1.Key);
                     }
 
                     if (P1Ready && P2Ready)

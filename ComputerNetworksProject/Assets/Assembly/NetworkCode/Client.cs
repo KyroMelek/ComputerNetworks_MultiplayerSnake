@@ -122,13 +122,14 @@ public class Client : MonoBehaviour
                 }
                 else if (receivedText.Contains("Ready"))
                 {
+                    bool readyStatus = bool.Parse(receivedText.Split(':')[1]);
                     if (receivedText.Contains("P1"))
                     {
-                        uiController.setReadyStatus(1);
+                        uiController.setReadyStatus(1, readyStatus);
                     }
                     else if (receivedText.Contains("P2"))
                     {
-                        uiController.setReadyStatus(2);
+                        uiController.setReadyStatus(2, readyStatus);
                     }
                 }
 

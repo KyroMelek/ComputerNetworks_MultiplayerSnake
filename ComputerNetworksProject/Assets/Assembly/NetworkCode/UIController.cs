@@ -72,7 +72,9 @@ public class UIController : MonoBehaviour
     private bool readyToWriteTextFields = false;
 
     private bool player1Ready = false;
+    private bool player1ReadyChanged = false;
     private bool player2Ready = false;
+    private bool player2ReadyChanged = false;
 
     private bool startGame = false;   
 
@@ -113,17 +115,17 @@ public class UIController : MonoBehaviour
             StartCoroutine(setText(opponentUserName, isClient));
         }
 
-        if (player1Ready)
+        if (player1ReadyChanged)
         {
-            NotReadyIconHost.SetActive(false);
-            ReadyIconHost.SetActive(true);
-            player1Ready = false;
+            NotReadyIconHost.SetActive(!player1Ready);
+            ReadyIconHost.SetActive(player1Ready);
+            player1ReadyChanged = false;
         }
-        if (player2Ready)
+        if (player2ReadyChanged)
         {
-            NotReadyIconClient.SetActive(false);
-            ReadyIconClient.SetActive(true);
-            player2Ready = false;
+            NotReadyIconClient.SetActive(!player2Ready);
+            ReadyIconClient.SetActive(player2Ready);
+            player2ReadyChanged = false;
         }
         if (startGame)
         {
@@ -225,33 +227,44 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void sendReadyStatus()
+    public void updateAndSendReadyStatus()
     {
-        string stringToSend = userName + ":Ready";
+        string stringToSend = userName + ":Ready:";
+
+        // Update player's ready status
+        if(!isClient)
+        {
+            player1Ready = !player1Ready;
+            stringToSend += player1Ready.ToString();
+            player1ReadyChanged = true;
+        }
+        else
+        {
+            player2Ready = !player2Ready;
+            stringToSend += player2Ready.ToString();
+            player2ReadyChanged = true;
+        }
+
+        // Send status to server
         int UDP_PORT = 7700;
         UdpClient udpClient = new UdpClient();
 
         var data = Encoding.UTF8.GetBytes(stringToSend);
         udpClient.Send(data, data.Length, hostIP, UDP_PORT);
-
-        if (!isClient)
-        {
-            NotReadyIconHost.SetActive(false);
-            ReadyIconHost.SetActive(true);
-        }
-        else 
-        {
-            NotReadyIconClient.SetActive(false);
-            ReadyIconClient.SetActive(true);
-        }
     }
 
-    public void setReadyStatus(int player)
+    public void setReadyStatus(int player, bool status)
     {
-        if (player == 1)        
-            player1Ready = true;
+        if (player == 1)   
+        {
+            player1Ready = status;
+            player1ReadyChanged = true;
+        }     
         else
-            player2Ready = true;
+        {
+            player2Ready = status;
+            player2ReadyChanged = true;
+        }
     }
 
     public void StartGame()
